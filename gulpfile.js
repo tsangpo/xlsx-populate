@@ -42,6 +42,8 @@ const PATHS = {
         base: "./browser",
         bundle: "xlsx-populate.js",
         noEncryptionBundle: "xlsx-populate-no-encryption.js",
+        decryptionBundle: "xlsx-populate-decryption.js",
+        decryptionSource: "./lib/decryptFile.js",
         sourceMap: "./",
         encryptionIgnores: ["./lib/Encryptor.js"]
     },
@@ -114,9 +116,9 @@ const runJasmine = (configPath, cb) => {
     jasmine.execute();
 };
 
-const runBrowserify = (ignores, bundle) => {
+const runBrowserify = (ignores, bundle, entries) => {
     return browserify({
-        entries: PATHS.browserify.source,
+        entries: entries || PATHS.browserify.source,
         debug: true,
         standalone: BROWSERIFY_STANDALONE_NAME
     })
@@ -163,7 +165,11 @@ const browserNoEncryption = gulp.series(blank, function browserNoEncryption() {
     return runBrowserify([PATHS.browserify.encryptionIgnores], PATHS.browserify.noEncryptionBundle);
 });
 
-const browser = gulp.series(browserFull, browserNoEncryption);
+const browserDecryption = gulp.series(blank, function browserDecryption() {
+    return runBrowserify([], PATHS.browserify.decryptionBundle, PATHS.browserify.decryptionSource);
+});
+
+const browser = gulp.series(browserFull, browserNoEncryption, browserDecryption);
 
 const lint = () => {
     return gulp

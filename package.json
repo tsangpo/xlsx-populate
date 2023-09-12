@@ -46,7 +46,7 @@
   "bugs": "https://github.com/dtjohnson/xlsx-populate/issues",
   "devDependencies": {
     "@babel/core": "^7.8.6",
-    "@babel/preset-env": "^7.8.6",
+    "@babel/preset-env": "^7.22.15",
     "babelify": "^10.0.0",
     "browserify": "^16.5.0",
     "edge-js": "^13.0.1",
@@ -72,7 +72,7 @@
     "proxyquire-universal": "^2.1.0",
     "proxyquireify": "^3.2.1",
     "replacestream": "^4.0.3",
-    "uglify-js": "^3.8.0",
+    "uglify-js": "^3.17.4",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0",
     "watchify": "^3.11.1"
